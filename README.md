@@ -21,7 +21,7 @@ Ce repo utilise des branches pour illustrer chaque étape du TDD :
 | `04-edge-cases` | Normalisation (lowercase, espaces, variantes) |
 | `05-value-object` | Refactoring : Value Object Iban |
 | `06-symfony-integration` | Intégration dans un contexte Symfony |
-| `07-venus-example` | Cas réel du projet |
+| `07-glossary-recap` | Glossaire des termes + récapitulatif |
 | `main` | Version finale avec documentation complète |
 
 ## Utilisation
@@ -57,4 +57,6 @@ make coverage
 - [03 - Walkthrough Luhn](docs/03-luhn-walkthrough.md)
 - [04 - TDD et Hexagonal](docs/04-hexagonal-testing.md)
 - [05 - Contexte Symfony](docs/05-symfony-context.md)
-- [06 - Exemple Venus](docs/06-venus-example.md)
+- [06 - Exemple Venus](docs/06-venus-example.md) *(placeholder)*
+- [07 - Glossaire](docs/07-glossaire.md) - Termes de test en français
+- [08 - Récapitulatif](docs/08-recapitulatif.md) - Résumé du workshop

@@ -1,78 +1,67 @@
-# Branche 06-symfony-integration
+# Branche 07-glossary-recap
 
 ## Objectif
 
-Montrer comment le **Domain TDD** s'integre dans une application **Symfony**.
+Fournir une **reference complete** pour les apprenants apres le workshop.
 
-## Architecture Hexagonale
+## Contenu ajoute
 
+### docs/07-glossaire.md
+
+Glossaire complet des termes de test en francais :
+
+**Methodologies**
+- TDD, BDD, ATDD
+
+**Types de tests**
+- Unitaire, Integration, Fonctionnel, Acceptation, E2E, Regression
+
+**Doublures de test**
+- Dummy, Stub, Spy, Mock, Fake
+
+**Architectures**
+- Clean Architecture, Hexagonale, DDD
+
+**Principes**
+- AAA, Given-When-Then, FIRST, Pyramide des tests
+
+**Anti-patterns**
+- Test fragile, Flaky, Mock hell...
+
+### docs/08-recapitulatif.md
+
+Resume du workshop :
+- Le cycle TDD
+- Progression des branches
+- Philosophie hexagonale
+- Checklist TDD
+- Ressources pour aller plus loin
+
+## Utilisation
+
+Ces documents servent de reference apres le workshop. Les apprenants peuvent :
+- Consulter le glossaire quand ils rencontrent un terme inconnu
+- Relire le recapitulatif pour se rememorer les concepts
+- Utiliser la checklist avant de coder
+
+## Points cles du glossaire
+
+| Terme | Definition courte |
+|-------|-------------------|
+| **TDD** | Test d'abord, code ensuite |
+| **Mock** | Simule un objet avec des attentes |
+| **Stub** | Retourne des valeurs predefinies |
+| **Fake** | Implementation simplifiee fonctionnelle |
+| **Hexagonal** | Domain pur + adaptateurs externes |
+
+## Fin du parcours
+
+Cette branche complete le workshop. L'apprenant a maintenant :
+- Pratique le TDD sur un cas reel
+- Compris l'architecture hexagonale
+- Un glossaire de reference
+- Des ressources pour continuer
+
+```bash
+git checkout main  # Version finale complete
 ```
-PRESENTATION (Symfony Controllers)
-       │
-       ▼
-APPLICATION (Use Cases)
-       │
-       ▼
-DOMAIN (Pure PHP - TDD)  ◄── C'est ici qu'on fait du TDD
-       │
-       ▼
-INFRASTRUCTURE (Symfony Validator, Doctrine...)
-```
-
-## Fichiers d'exemple
-
-```
-examples/symfony-integration/
-├── src/
-│   ├── Application/
-│   │   └── UseCase/
-│   │       └── ValidatePaymentIban.php    # Orchestre le Domain
-│   │
-│   ├── Presentation/
-│   │   └── Controller/
-│   │       └── PaymentController.php      # HTTP -> Use Case -> HTTP
-│   │
-│   └── Infrastructure/
-│       └── Symfony/
-│           └── Validator/
-│               ├── IbanConstraint.php           # Annotation Symfony
-│               └── IbanConstraintValidator.php  # Adaptateur vers Domain
-```
-
-## Ou tester quoi ?
-
-| Couche | Fichier | Type de test | Mocks ? |
-|--------|---------|--------------|---------|
-| Domain | `LuhnValidator.php` | Unit test (TDD) | **NON** |
-| Domain | `Iban.php` | Unit test (TDD) | **NON** |
-| Application | `ValidatePaymentIban.php` | Unit test | Minimal |
-| Presentation | `PaymentController.php` | Functional test | WebTestCase |
-| Infrastructure | `IbanConstraintValidator.php` | Integration test | Service reel |
-
-## Le principe : Domain = Pure PHP
-
-```php
-// MAUVAIS - Domain depend de Symfony
-namespace App\Domain\Banking;
-
-use Symfony\Component\Validator\...; // NON !
-
-// BON - Domain est pur
-namespace App\Domain\Banking;
-
-// Pas de use Symfony\...
-final class LuhnValidator { ... }
-```
-
-## Points cles
-
-- **TDD sur le Domain** : c'est la ou les regles metier vivent
-- **Pas de mocks dans le Domain** : c'est du pure PHP
-- **Infrastructure = adaptateurs** : connectent le Domain a Symfony
-- **Tests fonctionnels pour Presentation** : WebTestCase, vrais requetes HTTP
-
-## Votre philosophie appliquee
-
-> "Mocks lie" - on reserve les mocks aux frontieres (ports)
-> "Integration tests against real services" - Infrastructure testee avec vrais services
-> "TDD Hexagonal" - le Domain est le coeur teste en TDD
