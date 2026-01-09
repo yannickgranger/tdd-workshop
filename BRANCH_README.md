@@ -1,80 +1,78 @@
-# Branche 05-value-object
+# Branche 06-symfony-integration
 
 ## Objectif
 
-Montrer le **REFACTORING** a grande echelle grace a la confiance des tests.
+Montrer comment le **Domain TDD** s'integre dans une application **Symfony**.
 
-## Avant / Apres
+## Architecture Hexagonale
 
-**Avant (branche 04)** :
+```
+PRESENTATION (Symfony Controllers)
+       │
+       ▼
+APPLICATION (Use Cases)
+       │
+       ▼
+DOMAIN (Pure PHP - TDD)  ◄── C'est ici qu'on fait du TDD
+       │
+       ▼
+INFRASTRUCTURE (Symfony Validator, Doctrine...)
+```
+
+## Fichiers d'exemple
+
+```
+examples/symfony-integration/
+├── src/
+│   ├── Application/
+│   │   └── UseCase/
+│   │       └── ValidatePaymentIban.php    # Orchestre le Domain
+│   │
+│   ├── Presentation/
+│   │   └── Controller/
+│   │       └── PaymentController.php      # HTTP -> Use Case -> HTTP
+│   │
+│   └── Infrastructure/
+│       └── Symfony/
+│           └── Validator/
+│               ├── IbanConstraint.php           # Annotation Symfony
+│               └── IbanConstraintValidator.php  # Adaptateur vers Domain
+```
+
+## Ou tester quoi ?
+
+| Couche | Fichier | Type de test | Mocks ? |
+|--------|---------|--------------|---------|
+| Domain | `LuhnValidator.php` | Unit test (TDD) | **NON** |
+| Domain | `Iban.php` | Unit test (TDD) | **NON** |
+| Application | `ValidatePaymentIban.php` | Unit test | Minimal |
+| Presentation | `PaymentController.php` | Functional test | WebTestCase |
+| Infrastructure | `IbanConstraintValidator.php` | Integration test | Service reel |
+
+## Le principe : Domain = Pure PHP
+
 ```php
-$validator = new LuhnValidator();
-if ($validator->validate($userInput)) {
-    // OK mais $userInput est toujours une string
-    // Rien ne garantit qu'elle est valide plus tard
-}
+// MAUVAIS - Domain depend de Symfony
+namespace App\Domain\Banking;
+
+use Symfony\Component\Validator\...; // NON !
+
+// BON - Domain est pur
+namespace App\Domain\Banking;
+
+// Pas de use Symfony\...
+final class LuhnValidator { ... }
 ```
-
-**Apres (branche 05)** :
-```php
-$iban = new Iban($userInput); // Exception si invalide
-// A partir d'ici, $iban est GARANTI valide
-doSomething($iban);
-```
-
-## Le Value Object Iban
-
-```php
-final class Iban
-{
-    private string $value;
-
-    public function __construct(string $value)
-    {
-        // Validation dans le constructeur
-        // Impossible de creer un Iban invalide
-    }
-
-    public function getCountryCode(): string { ... }
-    public function getCheckDigits(): string { ... }
-    public function getBban(): string { ... }
-    public function toFormattedString(): string { ... }
-    public function equals(self $other): bool { ... }
-}
-```
-
-## Avantages DDD
-
-| Aspect | String | Value Object |
-|--------|--------|--------------|
-| Type-safety | Non | Oui |
-| Validation | A chaque usage | Une seule fois |
-| Methodes utiles | Non | Oui |
-| Immutabilite | Non | Oui |
-
-## Demonstration
-
-```bash
-./vendor/bin/phpunit
-
-# LuhnValidatorTest : 17 tests
-# IbanTest : 14 tests
-# TOTAL : 31 tests, tous verts !
-```
-
-**Les tests existants passent toujours** - c'est la puissance du TDD pour le refactoring.
 
 ## Points cles
 
-- **Les tests existants sont notre filet de securite**
-- **On peut refactorer en confiance**
-- **Le Value Object encapsule la validation**
-- **Type-safety : le compilateur nous aide**
+- **TDD sur le Domain** : c'est la ou les regles metier vivent
+- **Pas de mocks dans le Domain** : c'est du pure PHP
+- **Infrastructure = adaptateurs** : connectent le Domain a Symfony
+- **Tests fonctionnels pour Presentation** : WebTestCase, vrais requetes HTTP
 
-## Etape suivante
+## Votre philosophie appliquee
 
-```bash
-git checkout 06-symfony-integration
-```
-
-La branche suivante montre comment integrer le Domain dans Symfony.
+> "Mocks lie" - on reserve les mocks aux frontieres (ports)
+> "Integration tests against real services" - Infrastructure testee avec vrais services
+> "TDD Hexagonal" - le Domain est le coeur teste en TDD
