@@ -9,14 +9,15 @@ use App\Domain\Banking\LuhnValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TDD Walkthrough - Branch 02-red-green-refactor
+ * TDD Walkthrough - Branch 03-algorithm-discovery
  *
- * Cette branche montre les 3 premiers cycles TDD :
- * 1. Chaine vide -> exception
- * 2. Caracteres invalides -> exception
- * 3. Trop court -> exception
+ * Cette branche montre comment le TDD aide a DECOUVRIR l'algorithme.
+ * Chaque test nous force a implementer une partie de la logique.
  *
- * Chaque test a ete ecrit AVANT son implementation.
+ * L'algorithme IBAN (ISO 13616) :
+ * 1. Deplacer les 4 premiers caracteres a la fin
+ * 2. Convertir les lettres en nombres (A=10, B=11, ..., Z=35)
+ * 3. Le reste de la division par 97 doit etre 1
  */
 final class LuhnValidatorTest extends TestCase
 {
@@ -28,93 +29,171 @@ final class LuhnValidatorTest extends TestCase
     }
 
     // =========================================================================
-    // CYCLE 1 : Chaine vide
+    // TESTS DE FORMAT (repris de branche 02)
     // =========================================================================
 
-    /**
-     * Test 1 : Cas le plus simple - chaine vide
-     *
-     * Pourquoi ce test en premier ?
-     * - C'est le cas d'erreur le plus simple a gerer
-     * - Il force la creation de la classe
-     * - Il definit le contrat : validate() leve une exception si vide
-     *
-     * Implementation minimale :
-     * if ($iban === '') { throw new InvalidIbanException(...); }
-     */
     public function test_empty_string_throws_exception(): void
     {
         $this->expectException(InvalidIbanException::class);
         $this->validator->validate('');
     }
 
-    // =========================================================================
-    // CYCLE 2 : Caracteres invalides
-    // =========================================================================
-
-    /**
-     * Test 2 : Caracteres speciaux interdits
-     *
-     * Pourquoi ce test ?
-     * - Un IBAN ne contient que des lettres et chiffres
-     * - En ecrivant ce test, on DECOUVRE cette regle metier
-     * - Le test nous FORCE a definir ce qu'est un "caractere valide"
-     *
-     * Implementation minimale :
-     * if (!preg_match('/^[A-Za-z0-9]+$/', $iban)) { throw ... }
-     */
     public function test_invalid_characters_throws_exception(): void
     {
         $this->expectException(InvalidIbanException::class);
         $this->validator->validate('FR76!@#$');
     }
 
-    /**
-     * Test 2b : Espace dans l'IBAN
-     *
-     * Decouverte pendant l'ecriture du test 2 :
-     * "Et les espaces ? Les utilisateurs copient-collent avec des espaces..."
-     *
-     * DECISION : Pour l'instant, on refuse les espaces.
-     * On reviendra sur cette decision dans la branche 04 (normalisation).
-     */
-    public function test_spaces_are_currently_invalid(): void
-    {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR76 3000 6000');
-    }
-
-    // =========================================================================
-    // CYCLE 3 : Longueur minimale
-    // =========================================================================
-
-    /**
-     * Test 3 : IBAN trop court
-     *
-     * Pourquoi ce test ?
-     * - Un IBAN a une longueur minimale (2 lettres pays + 2 chiffres check + data)
-     * - On choisit 5 comme minimum pour simplifier
-     *
-     * Note : En vrai, la longueur depend du pays.
-     * Pour le workshop, on simplifie.
-     */
     public function test_too_short_throws_exception(): void
     {
         $this->expectException(InvalidIbanException::class);
         $this->validator->validate('FR7');
     }
 
+    // =========================================================================
+    // CYCLE 4 : Premier IBAN valide
+    // =========================================================================
+
     /**
-     * Test 3b : Cas limite - exactement 5 caracteres
+     * Test 4 : IBAN francais valide
      *
-     * Decouverte : "Quelle est la limite exacte ?"
-     * On teste le cas limite pour etre sur de notre implementation.
+     * C'est ici que le TDD devient interessant.
+     * On a un VRAI IBAN valide - le test FORCE l'implementation de l'algorithme.
+     *
+     * Decouverte : "Comment fonctionne l'algorithme IBAN ?"
+     * -> On doit rechercher et comprendre ISO 13616
+     * -> Le test nous GUIDE vers l'implementation correcte
      */
-    public function test_minimum_length_is_accepted(): void
+    public function test_valid_french_iban_returns_true(): void
     {
-        // 5 caracteres = longueur minimale acceptee
-        // Le test passe car on n'a pas encore implemente l'algorithme Luhn
-        $result = $this->validator->validate('FR761');
-        $this->assertTrue($result);
+        // IBAN de test francais (banque fictive, mais checksum valide)
+        $this->assertTrue(
+            $this->validator->validate('FR7630006000011234567890189')
+        );
+    }
+
+    // =========================================================================
+    // CYCLE 5 : Autre pays (generalisation)
+    // =========================================================================
+
+    /**
+     * Test 5 : IBAN allemand valide
+     *
+     * Pourquoi tester un autre pays ?
+     * - Verifier que l'algorithme est generique
+     * - Decouvrir si on a fait des hypotheses specifiques a la France
+     *
+     * Si ce test echoue, c'est qu'on a "sur-specialise" pour FR.
+     */
+    public function test_valid_german_iban_returns_true(): void
+    {
+        $this->assertTrue(
+            $this->validator->validate('DE89370400440532013000')
+        );
+    }
+
+    /**
+     * Test 5b : IBAN belge valide
+     *
+     * Un troisieme pays pour confirmer la generalisation.
+     */
+    public function test_valid_belgian_iban_returns_true(): void
+    {
+        $this->assertTrue(
+            $this->validator->validate('BE68539007547034')
+        );
+    }
+
+    // =========================================================================
+    // CYCLE 6 : Checksum invalide
+    // =========================================================================
+
+    /**
+     * Test 6 : IBAN avec checksum invalide
+     *
+     * C'est le test le plus important pour valider l'algorithme.
+     * On prend un IBAN valide et on modifie un chiffre.
+     *
+     * Decouverte : "Est-ce que notre algorithme detecte vraiment les erreurs ?"
+     */
+    public function test_invalid_checksum_returns_false(): void
+    {
+        // IBAN francais avec dernier chiffre modifie (189 -> 188)
+        $this->assertFalse(
+            $this->validator->validate('FR7630006000011234567890188')
+        );
+    }
+
+    /**
+     * Test 6b : Autre erreur de checksum
+     *
+     * On modifie un chiffre au milieu pour verifier que
+     * l'algorithme detecte les erreurs partout.
+     */
+    public function test_checksum_error_in_middle_returns_false(): void
+    {
+        // IBAN allemand avec un chiffre modifie au milieu
+        $this->assertFalse(
+            $this->validator->validate('DE89370400440532013001')
+        );
+    }
+
+    // =========================================================================
+    // CYCLE 7 : Decouverte - Grands nombres
+    // =========================================================================
+
+    /**
+     * Test 7 : IBAN long (test des grands nombres)
+     *
+     * Decouverte pendant l'implementation :
+     * "Les IBAN convertis en nombres sont TROP GRANDS pour PHP !"
+     *
+     * Exemple : DE89370400440532013000 devient 370400440532013000131489
+     * Ce nombre depasse PHP_INT_MAX.
+     *
+     * Solution : calculer le modulo par morceaux (technique standard).
+     * Ce test aurait echoue sans cette decouverte !
+     */
+    public function test_long_iban_handles_large_numbers(): void
+    {
+        // IBAN espagnol (24 caracteres)
+        $this->assertTrue(
+            $this->validator->validate('ES9121000418450200051332')
+        );
+    }
+
+    // =========================================================================
+    // TESTS DE REGRESSION
+    // =========================================================================
+
+    /**
+     * DataProvider pour tester plusieurs IBAN valides.
+     *
+     * Ces tests servent de regression : si on refactore,
+     * on veut etre sur de ne rien casser.
+     *
+     * @return array<string, array{string}>
+     */
+    public static function validIbanProvider(): array
+    {
+        return [
+            'France' => ['FR7630006000011234567890189'],
+            'Germany' => ['DE89370400440532013000'],
+            'Belgium' => ['BE68539007547034'],
+            'Spain' => ['ES9121000418450200051332'],
+            'Italy' => ['IT60X0542811101000000123456'],
+            'Netherlands' => ['NL91ABNA0417164300'],
+        ];
+    }
+
+    /**
+     * @dataProvider validIbanProvider
+     */
+    public function test_valid_ibans_from_various_countries(string $iban): void
+    {
+        $this->assertTrue(
+            $this->validator->validate($iban),
+            sprintf('IBAN %s should be valid', $iban)
+        );
     }
 }

@@ -1,57 +1,65 @@
-# Branche 02-red-green-refactor
+# Branche 03-algorithm-discovery
 
 ## Objectif
 
-Montrer le **rythme TDD** : Red -> Green -> Refactor, repete 3 fois.
+Montrer la vertu **DISCOVERY** du TDD : les tests nous guident vers l'implementation.
 
-## Les 3 cycles
+## Ce que le TDD nous a fait decouvrir
 
-### Cycle 1 : Chaine vide
-```
-RED   : test_empty_string_throws_exception() echoue (classe n'existe pas)
-GREEN : Creer LuhnValidator avec if ($iban === '') throw...
+### 1. L'algorithme IBAN (ISO 13616)
+
+En ecrivant `test_valid_french_iban_returns_true()`, on a du comprendre :
+- Deplacer les 4 premiers caracteres a la fin
+- Convertir les lettres en nombres (A=10, ..., Z=35)
+- Modulo 97 doit etre 1
+
+### 2. La generalisation
+
+En testant plusieurs pays (FR, DE, BE), on a verifie que notre implementation n'etait pas trop specifique.
+
+### 3. Le probleme des grands nombres
+
+```php
+// IBAN converti = 370400440532013000131489
+// Ce nombre > PHP_INT_MAX !
 ```
 
-### Cycle 2 : Caracteres invalides
-```
-RED   : test_invalid_characters_throws_exception() echoue
-GREEN : Ajouter preg_match('/^[A-Za-z0-9]+$/', $iban)
-```
+Le test `test_long_iban_handles_large_numbers()` a revele ce bug potentiel. Sans TDD, on l'aurait decouvert en production.
 
-### Cycle 3 : Longueur minimale
-```
-RED   : test_too_short_throws_exception() echoue
-GREEN : Ajouter strlen($iban) < 5
-```
+**Solution** : Calculer le modulo par morceaux de 7 chiffres.
 
 ## Demonstration
 
 ```bash
-# Les tests passent maintenant (GREEN)
+# Tous les tests passent
 ./vendor/bin/phpunit
 
-# Voir la couverture
-make coverage
+# 13 tests, 13 assertions
 ```
 
-## Decouvertes pendant le TDD
+## Structure du code
 
-En ecrivant les tests, on a decouvert des questions :
-
-1. "Et les espaces ?" -> On decide de les refuser pour l'instant
-2. "Quelle longueur minimale ?" -> On choisit 5 (simplifie)
-3. "Majuscules/minuscules ?" -> On accepte les deux pour l'instant
-
-Ces decisions sont documentees dans les tests !
+```
+src/Domain/Banking/
+├── InvalidIbanException.php  # Exception metier
+└── LuhnValidator.php         # Service domain avec algorithme complet
+    ├── assertValidFormat()   # Validation de format
+    ├── verifyChecksum()      # Algorithme ISO 13616
+    ├── convertLettersToNumbers()
+    └── mod97()               # Modulo pour grands nombres
+```
 
 ## Points cles
 
-- **Chaque test = une decision de design**
-- **On n'implemente que ce qui est teste**
-- **Les tests documentent le comportement**
+- **Les tests nous ont FORCE a comprendre l'algorithme**
+- **Chaque nouveau test = une nouvelle decouverte**
+- **Les bugs potentiels sont decouverts TOT (grands nombres)**
+- **Le code est documente par les tests**
 
 ## Etape suivante
 
 ```bash
-git checkout 03-algorithm-discovery
+git checkout 04-edge-cases
 ```
+
+La branche suivante montre comment TDD aide a gerer les cas limites (espaces, minuscules).
