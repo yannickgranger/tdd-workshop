@@ -179,4 +179,4 @@ On va construire cette classe **test par test**, en decouvrant l'algorithme au f
 
 ---
 
-**Suivant** : [01 - Introduction au TDD](01-introduction.md)
+**Suivant** : [01 - Introduction au TDD](02-introduction.md)

@@ -52,12 +52,13 @@ make coverage
 
 ## Documentation
 
-- [00 - L'algorithme IBAN](docs/00-algorithme-iban.md) - Comprendre ce qu'on va coder
-- [01 - Introduction au TDD](docs/01-introduction.md)
-- [02 - La procédure TDD](docs/02-tdd-procedure.md)
-- [03 - Walkthrough Luhn](docs/03-luhn-walkthrough.md)
-- [04 - TDD et Hexagonal](docs/04-hexagonal-testing.md)
-- [05 - Contexte Symfony](docs/05-symfony-context.md)
-- [06 - Exemple Venus](docs/06-venus-example.md) *(placeholder)*
-- [07 - Glossaire](docs/07-glossaire.md) - Termes de test en français
-- [08 - Récapitulatif](docs/08-recapitulatif.md) - Résumé du workshop
+- [00 - Stratégie de tests](docs/00-strategie-tests.md) - Pyramide, types, approche TDD+BDD
+- [01 - L'algorithme IBAN](docs/01-algorithme-iban.md) - Comprendre ce qu'on va coder
+- [02 - Introduction au TDD](docs/02-introduction.md)
+- [03 - La procédure TDD](docs/03-tdd-procedure.md)
+- [04 - Walkthrough Luhn](docs/04-luhn-walkthrough.md)
+- [05 - TDD et Hexagonal](docs/05-hexagonal-testing.md)
+- [06 - Contexte Symfony](docs/06-symfony-context.md)
+- [07 - Exemple Venus](docs/07-venus-example.md) *(placeholder)*
+- [08 - Glossaire](docs/08-glossaire.md) - Termes de test en français
+- [09 - Récapitulatif](docs/09-recapitulatif.md) - Résumé du workshop
