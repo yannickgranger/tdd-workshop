@@ -1,42 +1,57 @@
-# Branche 01-setup
+# Branche 02-red-green-refactor
 
 ## Objectif
 
-Montrer le point de depart du TDD : **le test existe, le code non**.
+Montrer le **rythme TDD** : Red -> Green -> Refactor, repete 3 fois.
 
-## Etat actuel
+## Les 3 cycles
 
-- PHPUnit configure
-- Premier test ecrit : `test_empty_string_throws_exception()`
-- Classes `LuhnValidator` et `InvalidIbanException` n'existent pas encore
+### Cycle 1 : Chaine vide
+```
+RED   : test_empty_string_throws_exception() echoue (classe n'existe pas)
+GREEN : Creer LuhnValidator avec if ($iban === '') throw...
+```
+
+### Cycle 2 : Caracteres invalides
+```
+RED   : test_invalid_characters_throws_exception() echoue
+GREEN : Ajouter preg_match('/^[A-Za-z0-9]+$/', $iban)
+```
+
+### Cycle 3 : Longueur minimale
+```
+RED   : test_too_short_throws_exception() echoue
+GREEN : Ajouter strlen($iban) < 5
+```
 
 ## Demonstration
 
 ```bash
-# Installer les dependances
-composer install
-
-# Lancer le test - IL DOIT ECHOUER (RED)
+# Les tests passent maintenant (GREEN)
 ./vendor/bin/phpunit
+
+# Voir la couverture
+make coverage
 ```
 
-Vous verrez une erreur :
-```
-Error: Class "App\Domain\Banking\LuhnValidator" not found
-```
+## Decouvertes pendant le TDD
 
-C'est **exactement** ce qu'on veut. Le test echoue parce que le code n'existe pas.
+En ecrivant les tests, on a decouvert des questions :
+
+1. "Et les espaces ?" -> On decide de les refuser pour l'instant
+2. "Quelle longueur minimale ?" -> On choisit 5 (simplifie)
+3. "Majuscules/minuscules ?" -> On accepte les deux pour l'instant
+
+Ces decisions sont documentees dans les tests !
+
+## Points cles
+
+- **Chaque test = une decision de design**
+- **On n'implemente que ce qui est teste**
+- **Les tests documentent le comportement**
 
 ## Etape suivante
 
-Passez a la branche `02-red-green-refactor` pour voir comment on passe au GREEN.
-
 ```bash
-git checkout 02-red-green-refactor
+git checkout 03-algorithm-discovery
 ```
-
-## Point cle
-
-> En TDD, on ecrit TOUJOURS le test avant le code.
-> Le test definit le comportement attendu.
-> L'erreur "class not found" est notre premier RED.
