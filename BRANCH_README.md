@@ -1,63 +1,80 @@
-# Branche 04-edge-cases
+# Branche 05-value-object
 
 ## Objectif
 
-Montrer comment TDD aide a gerer les **CAS LIMITES** et a prendre des decisions de design.
+Montrer le **REFACTORING** a grande echelle grace a la confiance des tests.
 
-## Questions decouvertes par les tests
+## Avant / Apres
 
-| Question | Test | Decision |
-|----------|------|----------|
-| Minuscules ? | `test_lowercase_iban_is_normalized` | Normaliser en majuscules |
-| Espaces ? | `test_iban_with_spaces_is_normalized` | Supprimer les espaces |
-| Tabulations ? | `test_tabs_are_invalid` | Refuser (YAGNI) |
-
-## Le pattern : Question -> Test -> Decision
-
+**Avant (branche 04)** :
+```php
+$validator = new LuhnValidator();
+if ($validator->validate($userInput)) {
+    // OK mais $userInput est toujours une string
+    // Rien ne garantit qu'elle est valide plus tard
+}
 ```
-1. "Et si l'utilisateur tape en minuscules ?"
-   -> Ecrire un test : validate('fr76...') doit retourner true
-   -> Implementer la normalisation
-   -> Le test DOCUMENTE la decision
 
-2. "Et les espaces ?"
-   -> Ecrire un test : validate('FR76 3000 ...') doit retourner true
-   -> Implementer str_replace(' ', '', $iban)
-   -> Le test DOCUMENTE la decision
+**Apres (branche 05)** :
+```php
+$iban = new Iban($userInput); // Exception si invalide
+// A partir d'ici, $iban est GARANTI valide
+doSomething($iban);
 ```
+
+## Le Value Object Iban
+
+```php
+final class Iban
+{
+    private string $value;
+
+    public function __construct(string $value)
+    {
+        // Validation dans le constructeur
+        // Impossible de creer un Iban invalide
+    }
+
+    public function getCountryCode(): string { ... }
+    public function getCheckDigits(): string { ... }
+    public function getBban(): string { ... }
+    public function toFormattedString(): string { ... }
+    public function equals(self $other): bool { ... }
+}
+```
+
+## Avantages DDD
+
+| Aspect | String | Value Object |
+|--------|--------|--------------|
+| Type-safety | Non | Oui |
+| Validation | A chaque usage | Une seule fois |
+| Methodes utiles | Non | Oui |
+| Immutabilite | Non | Oui |
 
 ## Demonstration
 
 ```bash
 ./vendor/bin/phpunit
 
-# 17 tests, 17 assertions
+# LuhnValidatorTest : 17 tests
+# IbanTest : 14 tests
+# TOTAL : 31 tests, tous verts !
 ```
 
-## Code ajoute
-
-```php
-private function normalize(string $iban): string
-{
-    // Supprimer les espaces
-    $iban = str_replace(' ', '', $iban);
-
-    // Convertir en majuscules
-    return strtoupper($iban);
-}
-```
+**Les tests existants passent toujours** - c'est la puissance du TDD pour le refactoring.
 
 ## Points cles
 
-- **Chaque cas limite = un test explicite**
-- **Le test documente la decision de design**
-- **YAGNI : on ne gere pas ce qu'on n'a pas teste**
-- **Les tests de regression protegent les decisions passees**
+- **Les tests existants sont notre filet de securite**
+- **On peut refactorer en confiance**
+- **Le Value Object encapsule la validation**
+- **Type-safety : le compilateur nous aide**
 
 ## Etape suivante
 
 ```bash
-git checkout 05-value-object
+git checkout 06-symfony-integration
 ```
 
-La branche suivante montre le REFACTORING : extraire un Value Object Iban.
+La branche suivante montre comment integrer le Domain dans Symfony.
