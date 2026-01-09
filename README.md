@@ -52,6 +52,7 @@ make coverage
 
 ## Documentation
 
+- [00 - L'algorithme IBAN](docs/00-algorithme-iban.md) - Comprendre ce qu'on va coder
 - [01 - Introduction au TDD](docs/01-introduction.md)
 - [02 - La procédure TDD](docs/02-tdd-procedure.md)
 - [03 - Walkthrough Luhn](docs/03-luhn-walkthrough.md)
