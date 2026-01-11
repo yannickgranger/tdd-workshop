@@ -25,12 +25,14 @@ final class LuhnValidatorTest extends TestCase
      * - C'est le cas d'erreur le plus simple a gerer
      * - Il force la creation de la classe
      * - Il definit le contrat : validate() leve une exception si vide
+     *
+     * EXERCICE:
+     * 1. Instancier LuhnValidator
+     * 2. Utiliser $this->expectException() pour attendre InvalidIbanException
+     * 3. Appeler validate('') avec une chaine vide
      */
     public function test_empty_string_throws_exception(): void
     {
-        $validator = new LuhnValidator();
-
-        $this->expectException(InvalidIbanException::class);
-        $validator->validate('');
+        $this->markTestIncomplete('TODO: Implement test_empty_string_throws_exception');
     }
 }
