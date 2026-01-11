@@ -11,8 +11,7 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - ./website:/app/website
-      - ./package.json:/app/package.json
+      - ./website:/app/website:Z
     profiles:
       - dev
 
@@ -40,3 +39,4 @@ services:
     command: sh -c "cp -r /app/website/.vitepress/dist/* /app/website/.vitepress/dist/ 2>/dev/null || true"
     profiles:
       - build
+

@@ -1,6 +1,7 @@
 {
   "name": "tdd-workshop-docs",
   "version": "1.0.0",
+  "type": "module",
   "description": "TDD Workshop Documentation Site",
   "scripts": {
     "docs:dev": "vitepress dev website",

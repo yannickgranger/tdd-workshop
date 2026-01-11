@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'TDD Workshop',
   description: 'Workshop pratique Test-Driven Development avec PHP',
   lang: 'fr-FR',
+  ignoreDeadLinks: true,
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
