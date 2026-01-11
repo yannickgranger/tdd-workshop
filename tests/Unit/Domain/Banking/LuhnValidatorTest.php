@@ -39,13 +39,13 @@ final class LuhnValidatorTest extends TestCase
      * - Il force la creation de la classe
      * - Il definit le contrat : validate() leve une exception si vide
      *
-     * Implementation minimale :
-     * if ($iban === '') { throw new InvalidIbanException(...); }
+     * EXERCICE:
+     * - Utiliser $this->expectException(InvalidIbanException::class)
+     * - Appeler $this->validator->validate('')
      */
     public function test_empty_string_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('');
+        $this->markTestIncomplete('TODO: Implement test_empty_string_throws_exception');
     }
 
     // =========================================================================
@@ -60,13 +60,13 @@ final class LuhnValidatorTest extends TestCase
      * - En ecrivant ce test, on DECOUVRE cette regle metier
      * - Le test nous FORCE a definir ce qu'est un "caractere valide"
      *
-     * Implementation minimale :
-     * if (!preg_match('/^[A-Za-z0-9]+$/', $iban)) { throw ... }
+     * EXERCICE:
+     * - Utiliser $this->expectException(InvalidIbanException::class)
+     * - Appeler validate() avec 'FR76!@#$'
      */
     public function test_invalid_characters_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR76!@#$');
+        $this->markTestIncomplete('TODO: Implement test_invalid_characters_throws_exception');
     }
 
     /**
@@ -77,11 +77,14 @@ final class LuhnValidatorTest extends TestCase
      *
      * DECISION : Pour l'instant, on refuse les espaces.
      * On reviendra sur cette decision dans la branche 04 (normalisation).
+     *
+     * EXERCICE:
+     * - Meme pattern que test 2
+     * - Tester avec 'FR76 3000 6000'
      */
     public function test_spaces_are_currently_invalid(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR76 3000 6000');
+        $this->markTestIncomplete('TODO: Implement test_spaces_are_currently_invalid');
     }
 
     // =========================================================================
@@ -95,13 +98,13 @@ final class LuhnValidatorTest extends TestCase
      * - Un IBAN a une longueur minimale (2 lettres pays + 2 chiffres check + data)
      * - On choisit 5 comme minimum pour simplifier
      *
-     * Note : En vrai, la longueur depend du pays.
-     * Pour le workshop, on simplifie.
+     * EXERCICE:
+     * - Utiliser $this->expectException(InvalidIbanException::class)
+     * - Tester avec 'FR7' (3 caracteres)
      */
     public function test_too_short_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR7');
+        $this->markTestIncomplete('TODO: Implement test_too_short_throws_exception');
     }
 
     /**
@@ -109,12 +112,13 @@ final class LuhnValidatorTest extends TestCase
      *
      * Decouverte : "Quelle est la limite exacte ?"
      * On teste le cas limite pour etre sur de notre implementation.
+     *
+     * EXERCICE:
+     * - Appeler validate('FR761') - 5 caracteres
+     * - Utiliser $this->assertTrue() sur le resultat
      */
     public function test_minimum_length_is_accepted(): void
     {
-        // 5 caracteres = longueur minimale acceptee
-        // Le test passe car on n'a pas encore implemente l'algorithme Luhn
-        $result = $this->validator->validate('FR761');
-        $this->assertTrue($result);
+        $this->markTestIncomplete('TODO: Implement test_minimum_length_is_accepted');
     }
 }
