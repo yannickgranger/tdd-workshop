@@ -27,127 +27,148 @@ final class IbanTest extends TestCase
     // CONSTRUCTION
     // =========================================================================
 
+    /**
+     * EXERCICE: new Iban('FR7630006000011234567890189')
+     * Verifier avec assertInstanceOf()
+     */
     public function test_valid_iban_can_be_created(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertInstanceOf(Iban::class, $iban);
+        $this->markTestIncomplete('TODO: Implement test_valid_iban_can_be_created');
     }
 
+    /**
+     * EXERCICE: expectException + new Iban('FR7630006000011234567890188')
+     * (checksum invalide - dernier chiffre modifie)
+     */
     public function test_invalid_iban_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        new Iban('FR7630006000011234567890188'); // checksum invalide
+        $this->markTestIncomplete('TODO: Implement test_invalid_iban_throws_exception');
     }
 
+    /**
+     * EXERCICE: expectException + new Iban('')
+     */
     public function test_empty_string_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        new Iban('');
+        $this->markTestIncomplete('TODO: Implement test_empty_string_throws_exception');
     }
 
+    /**
+     * EXERCICE: Iban::fromString('DE89370400440532013000')
+     */
     public function test_factory_method_works(): void
     {
-        $iban = Iban::fromString('DE89370400440532013000');
-
-        $this->assertInstanceOf(Iban::class, $iban);
+        $this->markTestIncomplete('TODO: Implement test_factory_method_works');
     }
 
     // =========================================================================
     // NORMALISATION
     // =========================================================================
 
+    /**
+     * EXERCICE:
+     * - Creer avec 'fr7630006000011234567890189' (minuscules)
+     * - Verifier toString() retourne 'FR7630006000011234567890189'
+     */
     public function test_lowercase_is_normalized(): void
     {
-        $iban = new Iban('fr7630006000011234567890189');
-
-        $this->assertSame('FR7630006000011234567890189', $iban->toString());
+        $this->markTestIncomplete('TODO: Implement test_lowercase_is_normalized');
     }
 
+    /**
+     * EXERCICE:
+     * - Creer avec 'FR76 3000 6000 0112 3456 7890 189' (espaces)
+     * - Verifier toString() retourne version sans espaces
+     */
     public function test_spaces_are_normalized(): void
     {
-        $iban = new Iban('FR76 3000 6000 0112 3456 7890 189');
-
-        $this->assertSame('FR7630006000011234567890189', $iban->toString());
+        $this->markTestIncomplete('TODO: Implement test_spaces_are_normalized');
     }
 
     // =========================================================================
     // ACCESSEURS
     // =========================================================================
 
+    /**
+     * EXERCICE: getCountryCode() doit retourner 'FR'
+     */
     public function test_get_country_code(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertSame('FR', $iban->getCountryCode());
+        $this->markTestIncomplete('TODO: Implement test_get_country_code');
     }
 
+    /**
+     * EXERCICE: getCountryCode() pour IBAN allemand -> 'DE'
+     */
     public function test_get_country_code_germany(): void
     {
-        $iban = new Iban('DE89370400440532013000');
-
-        $this->assertSame('DE', $iban->getCountryCode());
+        $this->markTestIncomplete('TODO: Implement test_get_country_code_germany');
     }
 
+    /**
+     * EXERCICE: getCheckDigits() doit retourner '76'
+     */
     public function test_get_check_digits(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertSame('76', $iban->getCheckDigits());
+        $this->markTestIncomplete('TODO: Implement test_get_check_digits');
     }
 
+    /**
+     * EXERCICE: getBban() doit retourner '30006000011234567890189'
+     */
     public function test_get_bban(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertSame('30006000011234567890189', $iban->getBban());
+        $this->markTestIncomplete('TODO: Implement test_get_bban');
     }
 
     // =========================================================================
     // FORMATAGE
     // =========================================================================
 
+    /**
+     * EXERCICE: toFormattedString() ajoute des espaces tous les 4 caracteres
+     * -> 'FR76 3000 6000 0112 3456 7890 189'
+     */
     public function test_to_formatted_string(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertSame('FR76 3000 6000 0112 3456 7890 189', $iban->toFormattedString());
+        $this->markTestIncomplete('TODO: Implement test_to_formatted_string');
     }
 
+    /**
+     * EXERCICE: (string) $iban doit fonctionner via __toString()
+     */
     public function test_to_string_magic_method(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        $this->assertSame('FR7630006000011234567890189', (string) $iban);
+        $this->markTestIncomplete('TODO: Implement test_to_string_magic_method');
     }
 
     // =========================================================================
     // COMPARAISON
     // =========================================================================
 
+    /**
+     * EXERCICE: equals() retourne true pour deux IBAN identiques
+     */
     public function test_equals_same_iban(): void
     {
-        $iban1 = new Iban('FR7630006000011234567890189');
-        $iban2 = new Iban('FR7630006000011234567890189');
-
-        $this->assertTrue($iban1->equals($iban2));
+        $this->markTestIncomplete('TODO: Implement test_equals_same_iban');
     }
 
+    /**
+     * EXERCICE: equals() retourne false pour IBAN differents
+     */
     public function test_equals_different_iban(): void
     {
-        $iban1 = new Iban('FR7630006000011234567890189');
-        $iban2 = new Iban('DE89370400440532013000');
-
-        $this->assertFalse($iban1->equals($iban2));
+        $this->markTestIncomplete('TODO: Implement test_equals_different_iban');
     }
 
+    /**
+     * EXERCICE: equals() compare les versions normalisees
+     * Deux IBAN avec formats differents mais meme valeur -> true
+     */
     public function test_equals_normalized_versions(): void
     {
-        // Meme IBAN, formats differents
-        $iban1 = new Iban('FR7630006000011234567890189');
-        $iban2 = new Iban('fr76 3000 6000 0112 3456 7890 189');
-
-        $this->assertTrue($iban1->equals($iban2));
+        $this->markTestIncomplete('TODO: Implement test_equals_normalized_versions');
     }
 
     // =========================================================================
@@ -157,16 +178,11 @@ final class IbanTest extends TestCase
     /**
      * Ce test documente l'immutabilite du Value Object.
      * Il n'y a pas de setter, donc l'IBAN ne peut pas changer.
+     *
+     * EXERCICE: Verifier que toString() retourne toujours la meme valeur
      */
     public function test_iban_is_immutable(): void
     {
-        $iban = new Iban('FR7630006000011234567890189');
-
-        // On ne peut pas modifier l'IBAN
-        // $iban->value = 'xxx'; // Erreur : propriete privee
-        // $iban->setValue('xxx'); // Erreur : methode inexistante
-
-        // La seule facon d'avoir un IBAN different est d'en creer un nouveau
-        $this->assertSame('FR7630006000011234567890189', $iban->toString());
+        $this->markTestIncomplete('TODO: Implement test_iban_is_immutable');
     }
 }
