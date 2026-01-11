@@ -1,7 +1,20 @@
+# PHP
 /vendor/
 /coverage/
 /.phpunit.cache/
 composer.lock
+
+# Node.js / VitePress
+node_modules/
+package-lock.json
+website/.vitepress/dist/
+website/.vitepress/cache/
+dist/
+
+# IDE
 .idea/
 .vscode/
 *.swp
+
+# Docker
+.docker-cache/

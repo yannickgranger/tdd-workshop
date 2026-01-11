@@ -1,0 +1,42 @@
+# TDD Workshop Documentation - Docker Compose
+
+services:
+  # ==========================================================================
+  # Development: Live reload on http://localhost:5173
+  # ==========================================================================
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./website:/app/website
+      - ./package.json:/app/package.json
+    profiles:
+      - dev
+
+  # ==========================================================================
+  # Production: Static site on http://localhost:8080
+  # ==========================================================================
+  docs:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8080:80"
+    profiles:
+      - prod
+
+  # ==========================================================================
+  # Build only: Generate static files to ./dist
+  # ==========================================================================
+  build:
+    build:
+      context: .
+      target: builder
+    volumes:
+      - ./dist:/app/website/.vitepress/dist
+    command: sh -c "cp -r /app/website/.vitepress/dist/* /app/website/.vitepress/dist/ 2>/dev/null || true"
+    profiles:
+      - build

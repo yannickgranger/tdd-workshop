@@ -1,64 +1,127 @@
-# TDD Workshop - Test-Driven Development with PHP
+# TDD Workshop - Exercises
 
-Workshop pratique pour apprendre le Test-Driven Development avec PHP et l'architecture hexagonale.
+**Version exercices** du workshop TDD. Les tests sont vides avec des hints - a vous de les implementer !
 
-## Objectifs
+> Pour les solutions completes, voir le repo `tdd-workshop` (sans `-exercises`).
 
-- Comprendre le cycle **Red-Green-Refactor**
-- Pratiquer le TDD sur un cas concret (validation IBAN/Luhn)
-- Voir comment le TDD s'intègre dans une architecture hexagonale
-- Découvrir la vertu "discovery" du TDD
+## Quick Start
+
+### Option 1: Exercices PHP
+
+```bash
+# Cloner et installer
+git clone <repo-url>
+cd tdd-workshop-exercises
+make install
+
+# Choisir un exercice
+git checkout 01-setup
+
+# Implementer les tests et verifier
+make test
+```
+
+### Option 2: Documentation Web (Docker)
+
+```bash
+# Dev server avec hot reload (localhost:5173)
+make docker-dev
+
+# Ou production (localhost:8080)
+make docker-prod
+```
+
+---
 
 ## Structure des branches
 
-Ce repo utilise des branches pour illustrer chaque étape du TDD :
+| Branche | Exercice | Difficulte |
+|---------|----------|------------|
+| `01-setup` | Premier test en echec | Facile |
+| `02-red-green-refactor` | Cycles TDD de base | Facile |
+| `03-algorithm-discovery` | Implementation IBAN | Moyen |
+| `04-edge-cases` | Normalisation | Moyen |
+| `05-value-object` | Refactoring Value Object | Avance |
+| `06-symfony-integration` | Integration Symfony | Avance |
 
-| Branche | Contenu |
-|---------|---------|
-| `01-setup` | Projet vide, PHPUnit configuré, premier test en échec |
-| `02-red-green-refactor` | Premiers cycles TDD (empty, invalid chars, too short) |
-| `03-algorithm-discovery` | Construction de l'algorithme Luhn test par test |
-| `04-edge-cases` | Normalisation (lowercase, espaces, variantes) |
-| `05-value-object` | Refactoring : Value Object Iban |
-| `06-symfony-integration` | Intégration dans un contexte Symfony |
-| `07-glossary-recap` | Glossaire des termes + récapitulatif |
-| `main` | Version finale avec documentation complète |
+---
 
-## Utilisation
+## Documentation Site
+
+Le site de documentation est construit avec **VitePress** et dockerise.
+
+### Commandes Make
 
 ```bash
-# Installer les dépendances
-make install
+make help              # Voir toutes les commandes
 
-# Lancer les tests
-make test
+# PHP
+make install           # Installer PHP deps
+make test              # Lancer les tests
+make coverage          # Tests avec couverture
 
-# Lancer les tests avec couverture
-make coverage
+# Documentation (Docker)
+make docker-dev        # Dev server (localhost:5173)
+make docker-prod       # Production (localhost:8080)
+make docker-build      # Build statique
+make docker-stop       # Arreter les containers
+
+# Documentation (Local Node.js)
+make docs-install      # npm install
+make docs-dev          # Dev server local
+make docs-build        # Build local
 ```
 
-## Pour suivre le workshop
+### Structure du site
 
-1. Cloner le repo
-2. Checkout la branche `01-setup`
-3. Suivre le guide dans `docs/`
+```
+website/
+├── index.md           # Page d'accueil
+├── guide/             # Documentation theorique
+│   ├── 00-strategie-tests.md
+│   ├── 01-algorithme-iban.md
+│   ├── ...
+│   └── 08-venus-lock-steal.md  # Case study Venus
+└── exercises/         # Exercices interactifs
+    ├── 01-setup.md
+    ├── 02-red-green.md
+    └── ...
+```
+
+### Composants Vue
+
+- `<Solution>` - Bloc pliable pour les solutions
+- `<Exercise>` - Carte d'exercice avec difficulte
+
+---
 
 ## Philosophie
 
-- **TDD sur le Domain** : logique métier pure, pas de mocks
-- **Tests d'intégration pour l'Infrastructure** : services réels
-- **"Mocks lie"** : on mock uniquement aux frontières
-- **Architecture hexagonale** : Domain indépendant du framework
+- **TDD sur le Domain** : logique metier pure, pas de mocks
+- **"Mocks lie"** : on prefere les vrais services
+- **Architecture hexagonale** : Domain independant du framework
 
-## Documentation
+---
 
-- [00 - Stratégie de tests](docs/00-strategie-tests.md) - Pyramide, types, approche TDD+BDD
-- [01 - L'algorithme IBAN](docs/01-algorithme-iban.md) - Comprendre ce qu'on va coder
-- [02 - Introduction au TDD](docs/02-introduction.md)
-- [03 - La procédure TDD](docs/03-tdd-procedure.md)
-- [04 - Walkthrough Luhn](docs/04-luhn-walkthrough.md)
-- [05 - TDD et Hexagonal](docs/05-hexagonal-testing.md)
-- [06 - Contexte Symfony](docs/06-symfony-context.md)
-- [07 - Exemple Venus](docs/07-venus-example.md) *(placeholder)*
-- [08 - Glossaire](docs/08-glossaire.md) - Termes de test en français
-- [09 - Récapitulatif](docs/09-recapitulatif.md) - Résumé du workshop
+## Pour les formateurs
+
+1. Le repo `tdd-workshop` contient les **solutions**
+2. Le repo `tdd-workshop-exercises` contient les **exercices**
+3. Le site web peut etre deploye sur GitLab Pages / Netlify
+
+### Deploiement GitLab Pages
+
+```yaml
+# .gitlab-ci.yml
+pages:
+  image: node:20
+  script:
+    - npm ci
+    - npm run docs:build
+    - mv website/.vitepress/dist public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+```
