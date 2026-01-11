@@ -32,22 +32,28 @@ final class LuhnValidatorTest extends TestCase
     // TESTS DE FORMAT (repris de branche 02)
     // =========================================================================
 
+    /**
+     * EXERCICE: expectException + validate('')
+     */
     public function test_empty_string_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('');
+        $this->markTestIncomplete('TODO: Implement');
     }
 
+    /**
+     * EXERCICE: expectException + validate('FR76!@#$')
+     */
     public function test_invalid_characters_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR76!@#$');
+        $this->markTestIncomplete('TODO: Implement');
     }
 
+    /**
+     * EXERCICE: expectException + validate('FR7')
+     */
     public function test_too_short_throws_exception(): void
     {
-        $this->expectException(InvalidIbanException::class);
-        $this->validator->validate('FR7');
+        $this->markTestIncomplete('TODO: Implement');
     }
 
     // =========================================================================
@@ -60,16 +66,13 @@ final class LuhnValidatorTest extends TestCase
      * C'est ici que le TDD devient interessant.
      * On a un VRAI IBAN valide - le test FORCE l'implementation de l'algorithme.
      *
-     * Decouverte : "Comment fonctionne l'algorithme IBAN ?"
-     * -> On doit rechercher et comprendre ISO 13616
-     * -> Le test nous GUIDE vers l'implementation correcte
+     * EXERCICE:
+     * - Utiliser assertTrue()
+     * - IBAN de test: 'FR7630006000011234567890189'
      */
     public function test_valid_french_iban_returns_true(): void
     {
-        // IBAN de test francais (banque fictive, mais checksum valide)
-        $this->assertTrue(
-            $this->validator->validate('FR7630006000011234567890189')
-        );
+        $this->markTestIncomplete('TODO: Implement test_valid_french_iban_returns_true');
     }
 
     // =========================================================================
@@ -83,25 +86,23 @@ final class LuhnValidatorTest extends TestCase
      * - Verifier que l'algorithme est generique
      * - Decouvrir si on a fait des hypotheses specifiques a la France
      *
-     * Si ce test echoue, c'est qu'on a "sur-specialise" pour FR.
+     * EXERCICE:
+     * - IBAN de test: 'DE89370400440532013000'
      */
     public function test_valid_german_iban_returns_true(): void
     {
-        $this->assertTrue(
-            $this->validator->validate('DE89370400440532013000')
-        );
+        $this->markTestIncomplete('TODO: Implement test_valid_german_iban_returns_true');
     }
 
     /**
      * Test 5b : IBAN belge valide
      *
-     * Un troisieme pays pour confirmer la generalisation.
+     * EXERCICE:
+     * - IBAN de test: 'BE68539007547034'
      */
     public function test_valid_belgian_iban_returns_true(): void
     {
-        $this->assertTrue(
-            $this->validator->validate('BE68539007547034')
-        );
+        $this->markTestIncomplete('TODO: Implement test_valid_belgian_iban_returns_true');
     }
 
     // =========================================================================
@@ -114,28 +115,24 @@ final class LuhnValidatorTest extends TestCase
      * C'est le test le plus important pour valider l'algorithme.
      * On prend un IBAN valide et on modifie un chiffre.
      *
-     * Decouverte : "Est-ce que notre algorithme detecte vraiment les erreurs ?"
+     * EXERCICE:
+     * - Utiliser assertFalse()
+     * - IBAN avec erreur: 'FR7630006000011234567890188' (dernier chiffre modifie)
      */
     public function test_invalid_checksum_returns_false(): void
     {
-        // IBAN francais avec dernier chiffre modifie (189 -> 188)
-        $this->assertFalse(
-            $this->validator->validate('FR7630006000011234567890188')
-        );
+        $this->markTestIncomplete('TODO: Implement test_invalid_checksum_returns_false');
     }
 
     /**
      * Test 6b : Autre erreur de checksum
      *
-     * On modifie un chiffre au milieu pour verifier que
-     * l'algorithme detecte les erreurs partout.
+     * EXERCICE:
+     * - IBAN avec erreur au milieu: 'DE89370400440532013001'
      */
     public function test_checksum_error_in_middle_returns_false(): void
     {
-        // IBAN allemand avec un chiffre modifie au milieu
-        $this->assertFalse(
-            $this->validator->validate('DE89370400440532013001')
-        );
+        $this->markTestIncomplete('TODO: Implement test_checksum_error_in_middle_returns_false');
     }
 
     // =========================================================================
@@ -152,25 +149,21 @@ final class LuhnValidatorTest extends TestCase
      * Ce nombre depasse PHP_INT_MAX.
      *
      * Solution : calculer le modulo par morceaux (technique standard).
-     * Ce test aurait echoue sans cette decouverte !
+     *
+     * EXERCICE:
+     * - IBAN espagnol (24 caracteres): 'ES9121000418450200051332'
      */
     public function test_long_iban_handles_large_numbers(): void
     {
-        // IBAN espagnol (24 caracteres)
-        $this->assertTrue(
-            $this->validator->validate('ES9121000418450200051332')
-        );
+        $this->markTestIncomplete('TODO: Implement test_long_iban_handles_large_numbers');
     }
 
     // =========================================================================
-    // TESTS DE REGRESSION
+    // TESTS DE REGRESSION (DataProvider)
     // =========================================================================
 
     /**
      * DataProvider pour tester plusieurs IBAN valides.
-     *
-     * Ces tests servent de regression : si on refactore,
-     * on veut etre sur de ne rien casser.
      *
      * @return array<string, array{string}>
      */
@@ -187,13 +180,14 @@ final class LuhnValidatorTest extends TestCase
     }
 
     /**
+     * EXERCICE:
+     * - Utiliser assertTrue() avec le $iban fourni par le DataProvider
+     * - Ajouter un message d'erreur explicite avec sprintf()
+     *
      * @dataProvider validIbanProvider
      */
     public function test_valid_ibans_from_various_countries(string $iban): void
     {
-        $this->assertTrue(
-            $this->validator->validate($iban),
-            sprintf('IBAN %s should be valid', $iban)
-        );
+        $this->markTestIncomplete('TODO: Implement test_valid_ibans_from_various_countries');
     }
 }
