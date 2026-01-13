@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Domain\Banking;
 
 use App\Domain\Banking\InvalidIbanException;
-use App\Domain\Banking\LuhnValidator;
+use App\Domain\Banking\Mod97Validator;
 use PHPUnit\Framework\TestCase;
 
 /**
  * TDD Walkthrough - Branch 01-setup
  *
  * Ce premier test est volontairement en ECHEC (RED).
- * La classe LuhnValidator n'existe pas encore.
+ * La classe Mod97Validator n'existe pas encore.
  *
  * C'est le point de depart du TDD : on ecrit le test AVANT le code.
  */
-final class LuhnValidatorTest extends TestCase
+final class Mod97ValidatorTest extends TestCase
 {
     /**
      * Test 1 : Cas le plus simple - chaine vide
@@ -27,7 +27,7 @@ final class LuhnValidatorTest extends TestCase
      * - Il definit le contrat : validate() leve une exception si vide
      *
      * EXERCICE:
-     * 1. Instancier LuhnValidator
+     * 1. Instancier Mod97Validator
      * 2. Utiliser $this->expectException() pour attendre InvalidIbanException
      * 3. Appeler validate('') avec une chaine vide
      */

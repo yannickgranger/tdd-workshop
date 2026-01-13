@@ -31,7 +31,7 @@
 ```php
 public function test_valid_iban_returns_true(): void
 {
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
     $this->assertTrue($validator->validate('FR7630006000011234567890189'));
 }
 ```
@@ -195,7 +195,7 @@ Le coeur metier est developpe en TDD pur :
 // Pas de mock, pas de framework
 public function test_iban_validation(): void
 {
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
     $this->assertTrue($validator->validate('FR76...'));
 }
 ```

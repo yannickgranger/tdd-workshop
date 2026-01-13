@@ -8,7 +8,7 @@ Montrer le point de depart du TDD : **le test existe, le code non**.
 
 - PHPUnit configure
 - Premier test ecrit : `test_empty_string_throws_exception()`
-- Classes `LuhnValidator` et `InvalidIbanException` n'existent pas encore
+- Classes `Mod97Validator` et `InvalidIbanException` n'existent pas encore
 
 ## Demonstration
 
@@ -22,7 +22,7 @@ composer install
 
 Vous verrez une erreur :
 ```
-Error: Class "App\Domain\Banking\LuhnValidator" not found
+Error: Class "App\Domain\Banking\Mod97Validator" not found
 ```
 
 C'est **exactement** ce qu'on veut. Le test echoue parce que le code n'existe pas.
