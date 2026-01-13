@@ -11,7 +11,7 @@ namespace App\Domain\Banking;
  *
  * Branche 04 : Ajout de la normalisation (espaces, minuscules).
  */
-final class LuhnValidator
+final class Mod97Validator
 {
     private const MIN_LENGTH = 5;
 
