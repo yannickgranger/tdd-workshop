@@ -141,4 +141,4 @@ public function test_valid_iban_returns_true(): void
 
 ---
 
-**Suivant** : [03 - Walkthrough Mod97](03-luhn-walkthrough.md)
+**Suivant** : [03 - Walkthrough Mod97](03-mod97-walkthrough.md)
