@@ -59,6 +59,6 @@ make coverage
 - [04 - Walkthrough Mod97](docs/04-mod97-walkthrough.md)
 - [05 - TDD et Hexagonal](docs/05-hexagonal-testing.md)
 - [06 - Contexte Symfony](docs/06-symfony-context.md)
-- [07 - Exemple Venus](docs/07-venus-example.md) *(placeholder)*
+- [07 - Exemple SOFTWARE](docs/07-case-study-example.md) *(placeholder)*
 - [08 - Glossaire](docs/08-glossaire.md) - Termes de test en français
 - [09 - Récapitulatif](docs/09-recapitulatif.md) - Résumé du workshop
