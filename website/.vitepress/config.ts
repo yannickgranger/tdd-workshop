@@ -4,6 +4,7 @@ export default defineConfig({
   title: 'TDD Workshop',
   description: 'Workshop pratique Test-Driven Development avec PHP',
   lang: 'fr-FR',
+  base: '/tdd-workshop/',
   ignoreDeadLinks: true,
 
   head: [
@@ -75,11 +76,11 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'gitlab', link: 'https://gitlab.com/nicesoft/tdd-workshop' }
+      { icon: 'github', link: 'https://github.com/yannickgranger/tdd-workshop' }
     ],
 
     footer: {
-      message: 'TDD Workshop - Softway Medical',
+      message: 'TDD Workshop',
       copyright: 'MIT License'
     },
 
