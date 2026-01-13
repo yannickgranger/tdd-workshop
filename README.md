@@ -5,7 +5,7 @@ Workshop pratique pour apprendre le Test-Driven Development avec PHP et l'archit
 ## Objectifs
 
 - Comprendre le cycle **Red-Green-Refactor**
-- Pratiquer le TDD sur un cas concret (validation IBAN/Luhn)
+- Pratiquer le TDD sur un cas concret (validation IBAN/mod97)
 - Voir comment le TDD s'intègre dans une architecture hexagonale
 - Découvrir la vertu "discovery" du TDD
 
@@ -17,7 +17,7 @@ Ce repo utilise des branches pour illustrer chaque étape du TDD :
 |---------|---------|
 | `01-setup` | Projet vide, PHPUnit configuré, premier test en échec |
 | `02-red-green-refactor` | Premiers cycles TDD (empty, invalid chars, too short) |
-| `03-algorithm-discovery` | Construction de l'algorithme Luhn test par test |
+| `03-algorithm-discovery` | Construction de l'algorithme mod97 test par test |
 | `04-edge-cases` | Normalisation (lowercase, espaces, variantes) |
 | `05-value-object` | Refactoring : Value Object Iban |
 | `06-symfony-integration` | Intégration dans un contexte Symfony |
