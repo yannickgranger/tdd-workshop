@@ -81,7 +81,7 @@ final class Iban
 
     public function __construct(string $value)
     {
-        $validator = new LuhnValidator();
+        $validator = new Mod97Validator();
 
         if (!$validator->validate($value)) {
             throw new InvalidIbanException('Invalid IBAN checksum');

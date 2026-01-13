@@ -62,7 +62,7 @@ Variante du TDD ou les tests d'acceptation sont ecrits en premier, en collaborat
 ```php
 public function test_empty_string_throws_exception(): void
 {
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
     $this->expectException(InvalidIbanException::class);
     $validator->validate('');
 }
@@ -390,7 +390,7 @@ final class BankAccount
 public function test_valid_iban_returns_true(): void
 {
     // Arrange - Preparer
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
 
     // Act - Executer
     $result = $validator->validate('FR7630006000011234567890189');

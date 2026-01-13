@@ -67,7 +67,7 @@ public function test_too_short_throws_exception(): void
 Pour **chaque** test :
 
 1. **RED** : Implementez le test, verifiez qu'il echoue
-2. **GREEN** : Ajoutez le code minimal dans `LuhnValidator`
+2. **GREEN** : Ajoutez le code minimal dans `Mod97Validator`
 3. **REFACTOR** : Ameliorez si necessaire (sans casser les tests)
 
 ```bash

@@ -22,7 +22,7 @@ git checkout 01-setup
 
 ## Votre mission
 
-Ouvrez le fichier `tests/Unit/Domain/Banking/LuhnValidatorTest.php` :
+Ouvrez le fichier `tests/Unit/Domain/Banking/Mod97ValidatorTest.php` :
 
 ```php
 public function test_empty_string_throws_exception(): void
@@ -32,7 +32,7 @@ public function test_empty_string_throws_exception(): void
 ```
 
 Implementez ce test pour qu'il :
-1. Cree une instance de `LuhnValidator`
+1. Cree une instance de `Mod97Validator`
 2. Attende une exception `InvalidIbanException`
 3. Appelle `validate('')` avec une chaine vide
 
@@ -40,7 +40,7 @@ Implementez ce test pour qu'il :
 
 ::: tip Hint 1 - Instanciation
 ```php
-$validator = new LuhnValidator();
+$validator = new Mod97Validator();
 ```
 :::
 
@@ -64,7 +64,7 @@ make test
 
 **Resultat attendu :**
 ```
-Error: Class "App\Domain\Banking\LuhnValidator" not found
+Error: Class "App\Domain\Banking\Mod97Validator" not found
 ```
 
 C'est **normal** ! Le test est en <span class="red">RED</span> parce que la classe n'existe pas encore.
@@ -76,7 +76,7 @@ C'est **normal** ! Le test est en <span class="red">RED</span> parce que la clas
 ```php
 public function test_empty_string_throws_exception(): void
 {
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
 
     $this->expectException(InvalidIbanException::class);
     $validator->validate('');
@@ -89,7 +89,7 @@ public function test_empty_string_throws_exception(): void
 
 Maintenant que vous avez un test en <span class="red">RED</span>, passez a l'etape <span class="green">GREEN</span> :
 
-1. Creez la classe `LuhnValidator` dans `src/Domain/Banking/`
+1. Creez la classe `Mod97Validator` dans `src/Domain/Banking/`
 2. Implementez le code **minimal** pour faire passer le test
 3. Relancez `make test`
 

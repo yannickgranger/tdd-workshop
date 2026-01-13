@@ -7,7 +7,7 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
   ],
 
   themeConfig: {
@@ -34,7 +34,7 @@ export default defineConfig({
           items: [
             { text: 'Introduction au TDD', link: '/guide/02-introduction' },
             { text: 'La procedure TDD', link: '/guide/03-tdd-procedure' },
-            { text: 'Walkthrough Luhn', link: '/guide/04-luhn-walkthrough' }
+            { text: 'Walkthrough Mod97', link: '/guide/04-mod97-walkthrough' }
           ]
         },
         {

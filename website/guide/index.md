@@ -21,7 +21,7 @@ Bienvenue dans le guide du workshop TDD. Ce guide couvre la theorie et les conce
 |---------|-------------|-------|
 | [Introduction au TDD](./02-introduction.md) | Le cycle Red-Green-Refactor | 10 min |
 | [La procedure TDD](./03-tdd-procedure.md) | Etape par etape, erreurs courantes | 10 min |
-| [Walkthrough Luhn](./04-luhn-walkthrough.md) | Implementation guidee test par test | 20 min |
+| [Walkthrough Mod97](./04-mod97-walkthrough.md) | Implementation guidee test par test | 20 min |
 
 ### 3. Architecture
 

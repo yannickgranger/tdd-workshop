@@ -28,7 +28,7 @@ final class Iban
      */
     public function __construct(string $value)
     {
-        $validator = new LuhnValidator();
+        $validator = new Mod97Validator();
 
         // Si la validation echoue, une exception est levee
         // Donc si on arrive ici, l'IBAN est valide
