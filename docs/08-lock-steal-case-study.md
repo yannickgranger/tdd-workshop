@@ -1,6 +1,6 @@
-# 08 - Venus Case Study: Lock Steal Authorization
+# 08 - SOFTWARE Case Study: Lock Steal Authorization
 
-> **Real-world TDD walkthrough** from a 15+ year legacy medical imaging system (RIS/NMIS).
+> **Real-world TDD walkthrough** from a 15+ year legacy medical imaging system (enterprise software).
 
 This document demonstrates how TDD was applied to implement a **role-based access control (RBAC)** feature for lock stealing in a production system.
 
@@ -21,9 +21,9 @@ This document demonstrates how TDD was applied to implement a **role-based acces
 
 ## 1. Business Context
 
-### What is Venus?
+### What is SOFTWARE?
 
-Venus is a **Radiology Information System (RIS)** used in hospitals and imaging centers. It manages:
+SOFTWARE is a **Radiology Information System (RIS)** used in hospitals and imaging centers. It manages:
 - Patient records and appointments
 - Medical examinations (X-rays, MRI, CT scans)
 - Doctor reports and signatures
@@ -31,7 +31,7 @@ Venus is a **Radiology Information System (RIS)** used in hospitals and imaging 
 
 ### The Lock System
 
-In Venus, when a doctor opens a patient's examination to write a report, the system **locks** that record:
+In SOFTWARE, when a doctor opens a patient's examination to write a report, the system **locks** that record:
 - Prevents concurrent edits (data corruption)
 - Shows other users who is working on it
 - Auto-releases when the user finishes
@@ -68,7 +68,7 @@ After discussion with the medical staff, these rules emerged:
 
 How do we determine if someone is a "doctor" vs a "secretary"?
 
-In Venus, staff members have **capability flags**:
+In SOFTWARE, staff members have **capability flags**:
 
 | Flag | Meaning |
 |------|---------|
