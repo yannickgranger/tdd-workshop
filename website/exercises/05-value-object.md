@@ -156,5 +156,5 @@ Vous avez complete tous les exercices du workshop TDD.
 
 ### Pour aller plus loin
 
-- 📖 [Venus Lock Steal Case Study](/guide/08-venus-lock-steal) - TDD sur un cas reel
+- 📖 [Lock Steal Case Study](/guide/08-lock-steal-case-study) - TDD sur un cas reel
 - 📚 [Glossaire](/guide/09-glossaire) - Termes de test

@@ -16,7 +16,7 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/guide/' },
       { text: 'Exercices', link: '/exercises/' },
-      { text: 'Venus Case Study', link: '/guide/08-venus-lock-steal' }
+      { text: 'Case Study', link: '/guide/08-lock-steal-case-study' }
     ],
 
     sidebar: {
@@ -47,8 +47,8 @@ export default defineConfig({
         {
           text: 'Cas Pratique',
           items: [
-            { text: 'Exemple Venus', link: '/guide/07-venus-example' },
-            { text: 'Venus Lock Steal', link: '/guide/08-venus-lock-steal' }
+            { text: 'Exemple Case Study', link: '/guide/07-case-study-example' },
+            { text: 'Lock Steal Case Study', link: '/guide/08-lock-steal-case-study' }
           ]
         },
         {

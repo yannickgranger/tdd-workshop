@@ -34,8 +34,8 @@ Bienvenue dans le guide du workshop TDD. Ce guide couvre la theorie et les conce
 
 | Section | Description | Temps |
 |---------|-------------|-------|
-| [Exemple Venus (placeholder)](./07-venus-example.md) | Pour les exercices en autonomie | - |
-| [Venus Lock Steal](./08-venus-lock-steal.md) | **Case study complet** - RBAC en production | 30 min |
+| [Exemple Case Study (placeholder)](./07-case-study-example.md) | Pour les exercices en autonomie | - |
+| [Lock Steal Case Study](./08-lock-steal-case-study.md) | **Case study complet** - RBAC en production | 30 min |
 
 ### 5. Reference
 

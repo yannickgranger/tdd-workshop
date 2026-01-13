@@ -33,7 +33,7 @@ features:
     title: Cas Pratique IBAN
     details: Implementez un validateur IBAN etape par etape, en decouvrant l'algorithme via les tests.
   - icon: 🏥
-    title: Cas Reel Venus
+    title: Cas Reel
     details: Decouvrez comment le TDD a ete applique sur un systeme medical en production.
 ---
 

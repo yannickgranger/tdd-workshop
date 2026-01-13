@@ -81,7 +81,7 @@ website/
 │   ├── 00-strategie-tests.md
 │   ├── 01-algorithme-iban.md
 │   ├── ...
-│   └── 08-venus-lock-steal.md  # Case study Venus
+│   └── 08-lock-steal-case-study.md  # Case study
 └── exercises/         # Exercices interactifs
     ├── 01-setup.md
     ├── 02-red-green.md

@@ -1,6 +1,6 @@
-# 06 - Exemple Venus
+# 06 - Exemple Case Study
 
-> **Note** : Cette section sera completee avec un cas reel du projet Venus.
+> **Note** : Cette section sera completee avec un cas reel de projet.
 
 ## Objectif
 
@@ -8,7 +8,7 @@ Appliquer le TDD sur un vrai cas issu de votre codebase.
 
 ## A venir
 
-- [ ] Issue reelle de Venus (fournie par NeoVenus)
+- [ ] Issue reelle de votre projet
 - [ ] Session TDD en direct sur le cas
 - [ ] Comparaison avant/apres TDD
 
