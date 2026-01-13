@@ -34,7 +34,7 @@
 ### 3. L'algorithme IBAN qu'on a construit
 
 ```php
-final class LuhnValidator
+final class Mod97Validator
 {
     public function validate(string $iban): bool
     {
@@ -72,7 +72,7 @@ final class LuhnValidator
                       ▼
 ┌─────────────────────────────────────────────┐
 │                DOMAIN                        │
-│  LuhnValidator, Iban, Exception             │
+│  Mod97Validator, Iban, Exception             │
 │  Tests : Unit TDD (PAS DE MOCKS)            │  ◄── C'est ici qu'on fait du TDD
 └─────────────────────┬───────────────────────┘
                       │
@@ -122,7 +122,7 @@ public function test_iban_with_spaces_is_normalized(): void
 
 On a pu extraire le Value Object `Iban` sans peur :
 ```
-Branch 04 : LuhnValidator seul
+Branch 04 : Mod97Validator seul
 Branch 05 : + Iban Value Object
 Tous les tests passent toujours !
 ```

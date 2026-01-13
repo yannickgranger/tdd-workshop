@@ -13,7 +13,7 @@ namespace App\Domain\Banking;
  * - Entrees/sorties claires
  * - Assez complexe pour beneficier du developpement incremental
  */
-final class LuhnValidator
+final class Mod97Validator
 {
     private const MIN_LENGTH = 5;
 

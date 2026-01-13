@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Domain\Banking;
 
 use App\Domain\Banking\InvalidIbanException;
-use App\Domain\Banking\LuhnValidator;
+use App\Domain\Banking\Mod97Validator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,13 +18,13 @@ use PHPUnit\Framework\TestCase;
  *
  * Chaque test a ete ecrit AVANT son implementation.
  */
-final class LuhnValidatorTest extends TestCase
+final class Mod97ValidatorTest extends TestCase
 {
-    private LuhnValidator $validator;
+    private Mod97Validator $validator;
 
     protected function setUp(): void
     {
-        $this->validator = new LuhnValidator();
+        $this->validator = new Mod97Validator();
     }
 
     // =========================================================================

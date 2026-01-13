@@ -9,7 +9,7 @@ Montrer le **rythme TDD** : Red -> Green -> Refactor, repete 3 fois.
 ### Cycle 1 : Chaine vide
 ```
 RED   : test_empty_string_throws_exception() echoue (classe n'existe pas)
-GREEN : Creer LuhnValidator avec if ($iban === '') throw...
+GREEN : Creer Mod97Validator avec if ($iban === '') throw...
 ```
 
 ### Cycle 2 : Caracteres invalides
