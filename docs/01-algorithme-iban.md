@@ -164,7 +164,7 @@ Voici des IBAN valides pour les tests (checksums corrects) :
 ## Ce qu'on va construire en TDD
 
 ```php
-final class LuhnValidator
+final class Mod97Validator
 {
     public function validate(string $iban): bool
     {

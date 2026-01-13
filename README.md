@@ -56,7 +56,7 @@ make coverage
 - [01 - L'algorithme IBAN](docs/01-algorithme-iban.md) - Comprendre ce qu'on va coder
 - [02 - Introduction au TDD](docs/02-introduction.md)
 - [03 - La procédure TDD](docs/03-tdd-procedure.md)
-- [04 - Walkthrough Luhn](docs/04-luhn-walkthrough.md)
+- [04 - Walkthrough Mod97](docs/04-mod97-walkthrough.md)
 - [05 - TDD et Hexagonal](docs/05-hexagonal-testing.md)
 - [06 - Contexte Symfony](docs/06-symfony-context.md)
 - [07 - Exemple Venus](docs/07-venus-example.md) *(placeholder)*
