@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Symfony\Validator;
 
 use App\Domain\Banking\InvalidIbanException;
-use App\Domain\Banking\LuhnValidator;
+use App\Domain\Banking\Mod97Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  * Validateur pour IbanConstraint.
  *
  * Cette classe est un ADAPTATEUR Infrastructure.
- * Elle utilise le Domain (LuhnValidator) depuis Symfony Validator.
+ * Elle utilise le Domain (Mod97Validator) depuis Symfony Validator.
  *
  * Pattern :
  * - Infrastructure depend du Domain
@@ -27,11 +27,11 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  */
 final class IbanConstraintValidator extends ConstraintValidator
 {
-    private LuhnValidator $validator;
+    private Mod97Validator $validator;
 
     public function __construct()
     {
-        $this->validator = new LuhnValidator();
+        $this->validator = new Mod97Validator();
     }
 
     public function validate(mixed $value, Constraint $constraint): void

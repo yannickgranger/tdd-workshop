@@ -43,7 +43,7 @@ examples/symfony-integration/
 
 | Couche | Fichier | Type de test | Mocks ? |
 |--------|---------|--------------|---------|
-| Domain | `LuhnValidator.php` | Unit test (TDD) | **NON** |
+| Domain | `Mod97Validator.php` | Unit test (TDD) | **NON** |
 | Domain | `Iban.php` | Unit test (TDD) | **NON** |
 | Application | `ValidatePaymentIban.php` | Unit test | Minimal |
 | Presentation | `PaymentController.php` | Functional test | WebTestCase |
@@ -61,7 +61,7 @@ use Symfony\Component\Validator\...; // NON !
 namespace App\Domain\Banking;
 
 // Pas de use Symfony\...
-final class LuhnValidator { ... }
+final class Mod97Validator { ... }
 ```
 
 ## Points cles

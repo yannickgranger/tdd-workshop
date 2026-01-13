@@ -122,7 +122,7 @@ Chaque test suit le pattern **Arrange-Act-Assert** :
 public function test_valid_iban_returns_true(): void
 {
     // Arrange - preparer
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
 
     // Act - executer
     $result = $validator->validate('FR7630006000011234567890189');
@@ -141,4 +141,4 @@ public function test_valid_iban_returns_true(): void
 
 ---
 
-**Suivant** : [03 - Walkthrough Luhn](03-luhn-walkthrough.md)
+**Suivant** : [03 - Walkthrough Mod97](03-luhn-walkthrough.md)

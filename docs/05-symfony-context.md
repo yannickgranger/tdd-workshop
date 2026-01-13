@@ -11,7 +11,7 @@ src/
 ├── Domain/                      # PURE PHP - TDD
 │   └── Banking/
 │       ├── Iban.php
-│       ├── LuhnValidator.php
+│       ├── Mod97Validator.php
 │       └── InvalidIbanException.php
 │
 ├── Application/                 # Use Cases
@@ -100,16 +100,16 @@ Le Controller :
 
 namespace App\Infrastructure\Symfony\Validator;
 
-use App\Domain\Banking\LuhnValidator;
+use App\Domain\Banking\Mod97Validator;
 use Symfony\Component\Validator\ConstraintValidator;
 
 final class IbanConstraintValidator extends ConstraintValidator
 {
-    private LuhnValidator $validator;
+    private Mod97Validator $validator;
 
     public function __construct()
     {
-        $this->validator = new LuhnValidator();
+        $this->validator = new Mod97Validator();
     }
 
     public function validate(mixed $value, Constraint $constraint): void

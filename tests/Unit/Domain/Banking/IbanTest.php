@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  * - Garantit l'immutabilite
  * - Fournit des methodes utiles (getCountryCode, toFormattedString...)
  *
- * IMPORTANT : Les tests existants (LuhnValidatorTest) continuent de passer !
+ * IMPORTANT : Les tests existants (Mod97ValidatorTest) continuent de passer !
  * C'est la garantie du TDD : on peut refactorer en toute confiance.
  */
 final class IbanTest extends TestCase

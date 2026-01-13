@@ -37,14 +37,14 @@
 ### 1. Pas de dependances framework
 
 ```php
-// Domain/Banking/LuhnValidator.php
+// Domain/Banking/Mod97Validator.php
 
 namespace App\Domain\Banking;
 
 // Aucun "use Symfony\..." !
 // C'est du PHP pur.
 
-final class LuhnValidator
+final class Mod97Validator
 {
     public function validate(string $iban): bool
     {
@@ -61,7 +61,7 @@ Puisqu'il n'y a pas de dependances, pas besoin de les mocker :
 // Test simple, pas de mock
 public function test_valid_iban(): void
 {
-    $validator = new LuhnValidator();
+    $validator = new Mod97Validator();
     $this->assertTrue($validator->validate('FR76...'));
 }
 ```
@@ -99,12 +99,12 @@ $repository->method('exists')->willReturn(true);
 ### Domain : TDD pur
 
 ```php
-// tests/Unit/Domain/Banking/LuhnValidatorTest.php
-final class LuhnValidatorTest extends TestCase
+// tests/Unit/Domain/Banking/Mod97ValidatorTest.php
+final class Mod97ValidatorTest extends TestCase
 {
     public function test_valid_iban(): void
     {
-        $validator = new LuhnValidator();
+        $validator = new Mod97Validator();
         $this->assertTrue($validator->validate('FR76...'));
     }
 }
