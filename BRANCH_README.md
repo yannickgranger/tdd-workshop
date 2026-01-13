@@ -42,7 +42,7 @@ Le test `test_long_iban_handles_large_numbers()` a revele ce bug potentiel. Sans
 ```
 src/Domain/Banking/
 ├── InvalidIbanException.php  # Exception metier
-└── LuhnValidator.php         # Service domain avec algorithme complet
+└── Mod97Validator.php         # Service domain avec algorithme complet
     ├── assertValidFormat()   # Validation de format
     ├── verifyChecksum()      # Algorithme ISO 13616
     ├── convertLettersToNumbers()

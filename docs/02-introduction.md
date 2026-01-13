@@ -29,19 +29,19 @@
 ```php
 public function test_empty_string_throws_exception(): void
 {
-    $validator = new LuhnValidator(); // Classe n'existe pas encore !
+    $validator = new Mod97Validator(); // Classe n'existe pas encore !
 
     $this->expectException(InvalidIbanException::class);
     $validator->validate('');
 }
 ```
 
-Le test echoue : `Class "LuhnValidator" not found`
+Le test echoue : `Class "Mod97Validator" not found`
 
 ### GREEN : Code minimal pour passer
 
 ```php
-final class LuhnValidator
+final class Mod97Validator
 {
     public function validate(string $iban): bool
     {

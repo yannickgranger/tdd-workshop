@@ -12,7 +12,7 @@ namespace App\Domain\Banking;
  *
  * C'est un SERVICE DOMAIN - PHP pur, aucune dependance framework.
  */
-final class LuhnValidator
+final class Mod97Validator
 {
     private const MIN_LENGTH = 5;
 
