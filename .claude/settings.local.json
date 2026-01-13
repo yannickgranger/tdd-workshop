@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for branch in 01-setup 02-red-green-refactor 03-algorithm-discovery 04-edge-cases 05-value-object 06-symfony-integration 07-glossary-recap)",
+      "Bash(do echo \"=== $branch ===\")",
+      "Bash(done)",
+      "Bash(do)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "meilisearch",
+    "gitlab"
+  ]
+}
