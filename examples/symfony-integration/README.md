@@ -9,7 +9,7 @@ src/
 ├── Domain/                    # PURE PHP - teste avec TDD
 │   └── Banking/
 │       ├── Iban.php           # Value Object (de la branche 05)
-│       ├── LuhnValidator.php  # Service Domain
+│       ├── Mod97Validator.php  # Service Domain
 │       └── InvalidIbanException.php
 │
 ├── Application/               # Use Cases - orchestre le Domain
