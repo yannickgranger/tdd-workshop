@@ -8,7 +8,7 @@ Montrer le **REFACTORING** a grande echelle grace a la confiance des tests.
 
 **Avant (branche 04)** :
 ```php
-$validator = new LuhnValidator();
+$validator = new Mod97Validator();
 if ($validator->validate($userInput)) {
     // OK mais $userInput est toujours une string
     // Rien ne garantit qu'elle est valide plus tard
@@ -57,7 +57,7 @@ final class Iban
 ```bash
 ./vendor/bin/phpunit
 
-# LuhnValidatorTest : 17 tests
+# Mod97ValidatorTest : 17 tests
 # IbanTest : 14 tests
 # TOTAL : 31 tests, tous verts !
 ```
