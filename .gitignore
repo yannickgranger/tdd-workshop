@@ -18,3 +18,8 @@ dist/
 
 # Docker
 .docker-cache/
+
+node_modules/
+website/.vitepress/cache/
+.claude/
+.phpunit.result.cache
